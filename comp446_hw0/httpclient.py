@@ -47,7 +47,7 @@ class HttpClient:
         """
             Executes an HTTP GET method and returns the result
             Params should be a dictionary of unencoded query parameters
-            as an HttpResponse object.
+            as an HttpResponse object. Please enter code below.
         """
         
         return ""
@@ -56,21 +56,21 @@ class HttpClient:
         """
             Executes an HTTP POST method and returns the result
             Params should be a dictionary of unencoded query parameters
-            as an HttpResponse object.
+            as an HttpResponse object. Please enter code below.
         """
         return ""
     
     def _constructGetRequest(self, path):
         """
             Returns a string containing an HTTP 1.0 GET request
-            for self.host and the requested path.
+            for self.host and the requested path. Please enter code below.
         """
         return ""
     
     def _constructPostRequest(self, path, body):
         """
             Returns a string containing an HTTP 1.0 GET request
-            for self.host and the requested path and body.
+            for self.host and the requested path and body. Please enter code below.
         """
         return ""
     
@@ -93,8 +93,20 @@ class HttpClient:
         print(responseLines)
         response = HttpResponse()
         
-        # fill in the member variables for the http response object
+        # the member variables for the http response object
         # by parsing the responseLines list of strings
+        
+        for i, line in enumerate(responseLines):
+            if i == 0:
+                (version, code, reason) = line.split(' ', 2)
+                response.statusCode = int(code)
+                response.statusMessage = reason
+            elif not line:
+                response.body = '\r\n'.join(responseLines[i+1:])
+                break
+            else:
+                key, value = line.split(':', 1)
+                response.headers[key.strip()] = value.strip()
         
         return response 
     
