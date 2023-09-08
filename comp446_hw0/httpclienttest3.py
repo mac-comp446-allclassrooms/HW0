@@ -1,7 +1,9 @@
 import unittest
 import json
 from json import loads
+import tracemalloc
 
+tracemalloc.start()
 
 import httpclient
 import httpclienttest2
