@@ -1,5 +1,8 @@
 import unittest
 import httpclient
+import tracemalloc
+
+tracemalloc.start()
 
 class TestHttpClient(unittest.TestCase):
     
@@ -7,7 +10,7 @@ class TestHttpClient(unittest.TestCase):
         pass
 
     def testGetMethod(self):
-        client = httpclient.HttpClient('www.shilad.com', 80);
+        client = httpclient.HttpClient('www.bret-jackson.com', 80);
                 
         response = client.doGet('/nonExistentPage')
         self.assertEquals(response.statusCode, 404)
@@ -16,8 +19,8 @@ class TestHttpClient(unittest.TestCase):
         response = client.doGet('/index.html')
         self.assertEquals(response.statusCode, 200)
         self.assertEquals(response.statusMessage, 'OK')
-        self.assertEquals(response.headers['Content-Type'], 'text/html; charset=UTF-8' )
-        self.assertTrue(response.body.find('ssen@macalester.edu') > 0)
+        self.assertEquals(response.headers['Content-Type'], 'text/html' )
+        self.assertTrue(response.body.find(''MSCS Department') > 0)
     
 if __name__ == '__main__':
     unittest.main()
